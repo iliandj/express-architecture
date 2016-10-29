@@ -14,3 +14,6 @@ h1 {
 .menu li:after {
   content: "\00a0";
 }
+.menu li.register_item {
+  margin-left: 50px;
+}

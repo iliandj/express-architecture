@@ -10,4 +10,9 @@ html
           a(href="/") Home
         li
           a(href="/about") About
+        li.register_item
+          a(href="/users/register") Register
+        if (globalError)
+          // TODO: Change h3 to div with class and appears under the menu 
+          h3= globalError
       block main-content
