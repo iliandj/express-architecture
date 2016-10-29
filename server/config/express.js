@@ -13,8 +13,7 @@ module.exports = (config, app) => {
   app.use(bodyParser.urlencoded({extended: true}))
 
   let sessionOptions = {
-    // TODO: Move secret to config file or environment variable for production
-    secret: 'neshto-taino!@#$%',
+    secret: config.sessionSecret,
     resave: true,
     saveUninitialized: false
   }

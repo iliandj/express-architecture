@@ -6,11 +6,13 @@ module.exports = {
   development: {
     rootPath: rootPath,
     db: 'mongodb://localhost:27017/some-express-db',
-    port: 1337
+    port: 1337,
+    sessionSecret: 'neshto-taino!@#$%'
   },
   production: {
     rootPath: rootPath,
     db: process.env.MONGO_DB_CONN_STRING,
-    port: process.env.port
+    port: process.env.port,
+    sessionSecret: process.env.EXPRESS_SESSION_SECRET
   }
 }
