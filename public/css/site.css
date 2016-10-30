@@ -14,6 +14,9 @@ h1 {
 .menu li:after {
   content: "\00a0";
 }
-.menu li.register_item {
+.menu li.users_item {
   margin-left: 50px;
+}
+#logout-form {
+  display: inline-block
 }

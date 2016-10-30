@@ -10,12 +10,12 @@ module.exports = (config, app) => {
   app.set('views', path.join(config.rootPath, 'server/views'))
 
   app.use(cookieParser())
-  app.use(bodyParser.urlencoded({extended: true}))
+  app.use(bodyParser.urlencoded({ extended: true }))
 
   let sessionOptions = {
     secret: config.sessionSecret,
     resave: true,
-    saveUninitialized: false
+    saveUninitialized: true
   }
 
   if (app.get('env' !== 'development')) {
@@ -28,6 +28,13 @@ module.exports = (config, app) => {
   app.use(session(sessionOptions))
   app.use(passport.initialize())
   app.use(passport.session())
+  app.use((req, res, next) => {
+    if (req.user) {
+      res.locals.currentUser = req.user
+    }
+
+    next()
+  })
 
   app.use(express.static(path.join(config.rootPath + 'public')))
 }

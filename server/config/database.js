@@ -7,13 +7,15 @@ module.exports = (config) => {
 
   let db = mongoose.connection
 
-  db.once('open', (err) => {
-    if (err) console.log(err)
+  db.once('open', err => {
+    if (err) {
+      console.log(err)
+    }
 
     console.log('MongoDB ready!')
   })
 
-  db.on('error', (err) => console.log('Database error: ' + err))
+  db.on('error', err => console.log('Database error: ' + err))
 
   require('../data/User').seedAdminUser()
 }

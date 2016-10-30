@@ -10,8 +10,17 @@ html
           a(href="/") Home
         li
           a(href="/about") About
-        li.register_item
-          a(href="/users/register") Register
+        if (currentUser)
+          li.users_item
+            span Hello, #{currentUser.username}
+          li
+            form#logout-form(method="post" action="/users/logout")
+              a(href="javascript:document.getElementById('logout-form').submit()") Logout
+        else
+          li.users_item
+            a(href="/users/register") Register
+          li
+            a(href="/users/login") Log In
         if (globalError)
           // TODO: Change h3 to div with class and appears under the menu 
           h3= globalError

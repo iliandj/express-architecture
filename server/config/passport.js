@@ -6,7 +6,8 @@ module.exports = () => {
   passport.use(new LocalPassport({
     usernameField: 'username',
     passwordField: 'password'
-  }, (username, password, done) => {
+  },
+  (username, password, done) => {
     User
       .findOne({ username: username })
       .then(user => {
@@ -21,11 +22,9 @@ module.exports = () => {
   })
 
   passport.deserializeUser((id, done) => {
-    User
-      .findById(id)
-      .then(user => {
-        if (!user) return done(null, false)
-        return done(null, user)
-      })
+    User.findById(id).then(user => {
+      if (!user) return done(null, false)
+      return done(null, user)
+    })
   })
 }
