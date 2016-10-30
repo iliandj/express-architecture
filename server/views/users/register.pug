@@ -4,7 +4,7 @@ block main-content
   form(method="post" action="/users/create")
     label(for="username") Username
     br
-    input(type="text" name="username" id="username")
+    input(type="text" name="username" id="username" value=username)
     br
     label(for="password") Password
     br
@@ -16,10 +16,10 @@ block main-content
     br
     label(for="first-name") First name
     br
-    input(type="text" name="firstName" id="first-name")
+    input(type="text" name="firstName" id="first-name" value=firstName)
     br
     label(for="last-name") Last name
     br
-    input(type="text" name="lastName" id="last-name")
+    input(type="text" name="lastName" id="last-name" value=lastName)
     br
     input(type="submit" value="Create")

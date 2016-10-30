@@ -1,4 +1,5 @@
 let encryption = require('../utilities/encryption')
+let User = require('mongoose').model('User')
 
 module.exports = {
   register: (req, res) => {
@@ -11,11 +12,24 @@ module.exports = {
     // TODO: User must not already exist
     // TODO: Password must be more than 6 characters long
     if (user.password !== user.confirmPassword) {
-      res.render('users/register', { globalError: 'Password do not match!' })
+      user.globalError = 'Password do not match!'
+      res.render('users/register', user)
     } else {
       user.salt = encryption.generateSalt()
       user.hashedPassword = encryption.generateHashPassword(user.salt, user.password)
-      res.send('BACHKA')
+
+      User
+        .create(user)
+        .then(user => {
+          req.logIn(user, (err, user) => {
+            if (err) {
+              res.render('users/register', { globalError: 'Ooops 500' })
+              return
+            }
+
+            res.redirect('/')
+          })
+        })
     }
   }
 }
