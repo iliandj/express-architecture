@@ -5,23 +5,24 @@ html
     link(rel="stylesheet", href="/css/site.css")
   body
     .container
-      ul.menu
-        li
-          a(href="/") Home
-        li
-          a(href="/about") About
-        if (currentUser)
-          li.users_item
-            span Hello, #{currentUser.username}
+      nav
+        ul.menu
           li
-            form#logout-form(method="post" action="/users/logout")
-              a(href="javascript:document.getElementById('logout-form').submit()") Logout
-        else
-          li.users_item
-            a(href="/users/register") Register
+            a(href="/") Home
           li
-            a(href="/users/login") Log In
-        if (globalError)
-          // TODO: Change h3 to div with class and appears under the menu 
-          h3= globalError
+            a(href="/about") About
+          if (currentUser)
+            li.users_item
+              span Hello, #{currentUser.username}
+            li
+              form#logout-form(method="post" action="/users/logout")
+                a(href="javascript:document.getElementById('logout-form').submit()") Logout
+          else
+            li.users_item
+              a(href="/users/register") Register
+            li
+              a(href="/users/login") Log In
+          if (globalError)
+            // TODO: Change h3 to div with class and appears under the menu 
+            h3= globalError
       block main-content
