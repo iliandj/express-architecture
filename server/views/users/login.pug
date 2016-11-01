@@ -1,13 +1,11 @@
 extends ../shared/layout
 block main-content
   h1 Log In
-  form(method="post" action="/users/authenticate")
-    label(for="username") Username
-    br
-    input(type="text" name="username" id="username")
-    br
-    label(for="password") Password
-    br
-    input(type="password" name="password" id="password")
-    br
-    input(type="submit" value="Log In")
+  form.col-xs-3(method="post" action="/users/authenticate")
+    div.form-group
+      label(for="username") Username
+      input.form-control(type="text" name="username" id="username")
+    div.form-group
+      label(for="password") Password
+      input.form-control(type="password" name="password" id="password")
+    button.btn.btn-default(type="submit") Log In

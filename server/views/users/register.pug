@@ -1,25 +1,20 @@
 extends ../shared/layout
 block main-content
   h1 Create new user
-  form(method="post" action="/users/create")
-    label(for="username") Username
-    br
-    input(type="text" name="username" id="username" value=username)
-    br
-    label(for="password") Password
-    br
-    input(type="password" name="password" id="password")
-    br
-    label(for="confirm-password") Confirm Password
-    br
-    input(type="password" name="confirmPassword" id="confirm-password")
-    br
-    label(for="first-name") First Name
-    br
-    input(type="text" name="firstName" id="first-name" value=firstName)
-    br
-    label(for="last-name") Last Name
-    br
-    input(type="text" name="lastName" id="last-name" value=lastName)
-    br
-    input(type="submit" value="Create")
+  form.col-xs-3(method="post" action="/users/create")
+    div.form-group
+      label(for="username") Username
+      input.form-control(type="text" name="username" id="username" value=username)
+    div.form-group
+      label(for="password") Password
+      input.form-control(type="password" name="password" id="password")
+    div.form-group
+      label(for="confirm-password") Confirm Password
+      input.form-control(type="password" name="confirmPassword" id="confirm-password")
+    div.form-group
+      label(for="first-name") First Name
+      input.form-control(type="text" name="firstName" id="first-name" value=firstName)
+    div.form-group
+      label(for="last-name") Last Name
+      input.form-control(type="text" name="lastName" id="last-name" value=lastName)
+    button.btn.btn-default(type="submit") Create

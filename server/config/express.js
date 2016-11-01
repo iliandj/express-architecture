@@ -19,7 +19,7 @@ module.exports = (config, app) => {
         return User
                 .findOne({ 'username': username })
                 .then(function (user) {
-                  if (user) { 
+                  if (user) {
                     throw new Error('User already exist')
                   }
                 })

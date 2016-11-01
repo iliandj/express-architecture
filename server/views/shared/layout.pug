@@ -1,33 +1,54 @@
 doctype
 html
   head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+ 
     title Hello!
-    link(rel="stylesheet", href="/css/site.css")
+    // link(rel="stylesheet", href="/css/site.css")
+    
+    // Latest compiled and minified CSS
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
+
+    // Optional theme
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous")
   body
     .container
-      nav
-        ul.menu
-          li
-            a(href="/") Home
-          li
-            a(href="/about") About
-          if (currentUser)
-            li.users_item
-              span Hello, #{currentUser.username}
-            li
-              form#logout-form(method="post" action="/users/logout")
-                a(href="javascript:document.getElementById('logout-form').submit()") Logout
-          else
-            li.users_item
-              a(href="/users/register") Register
-            li
-              a(href="/users/login") Log In
+      nav.navbar.navbar-default
+        div.container-fluid
+          #navbar.navbar-collapse.collapse
+            ul.nav.navbar-nav
+              li
+                a(href="/") Home
+              li
+                a(href="/about") About
+            ul.nav.navbar-nav.navbar-right
+              if (currentUser)
+                li
+                  p.navbar-text Signed in as 
+                    a.navbar-link
+                      strong #{currentUser.username}
+                li
+                  a(class="navbar-link" href="javascript:document.getElementById('logout-form').submit()") Logout
+                  form#logout-form(method="post" action="/users/logout")                    
+              else
+                li
+                  a(href="/users/register") Register
+                li
+                  a(href="/users/login") Log In
       if (globalError)
-        // TODO: Change h3 to div with class and appears under the menu 
+        // TODO: Remove globalError and migrate to express-validator
         h3= globalError
       if (errors)
-        section.errors
-          ul
+        div.panel.panel-danger
+          div.panel-heading
+            h3.panel-title Requirements
+          div.panel-body
             each error in errors
-              li= error.msg
+              div= error.msg
       block main-content
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+    
+    // Latest compiled and minified JavaScript
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
