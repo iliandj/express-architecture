@@ -22,16 +22,28 @@ html
               li
                 a(href="/") Home
               li
+                a(href="/movies/genres") Genres
+              li
+                a(href="/movies/a-z-list") A-Z List
+              li
                 a(href="/about") About
             ul.nav.navbar-nav.navbar-right
               if (currentUser)
                 li
                   p.navbar-text Signed in as 
-                    a.navbar-link
+                    a.navbar-link(href="/users/profile")
                       strong #{currentUser.username}
+                li.dropdown
+                  a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Administration 
+                    span.caret
+                  ul.dropdown-menu
+                    li
+                      a(href="/categories/manage") Categories
+                    li
+                      a(href="/movies/manage") Movies
                 li
                   a(class="navbar-link" href="javascript:document.getElementById('logout-form').submit()") Logout
-                  form#logout-form(method="post" action="/users/logout")                    
+                  form#logout-form(method="post" action="/users/logout")
               else
                 li
                   a(href="/users/register") Register

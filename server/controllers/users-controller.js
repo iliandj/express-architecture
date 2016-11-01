@@ -79,5 +79,13 @@ module.exports = {
   logout: (req, res) => {
     req.logout()
     res.redirect('/')
+  },
+  profile: (req, res) => {
+    let user = res.locals.currentUser
+
+    res.render('users/profile', user)
+  },
+  update: (req, res) => {
+    // TODO: Update current user
   }
 }
