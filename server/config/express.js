@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const passport = require('passport')
+const expressValidator = require('express-validator')
+const User = require('mongoose').model('User')
 
 module.exports = (config, app) => {
   app.set('view engine', 'pug')
@@ -11,11 +13,24 @@ module.exports = (config, app) => {
 
   app.use(cookieParser())
   app.use(bodyParser.urlencoded({ extended: true }))
+  app.use(expressValidator({
+    customValidators: {
+      isUsernameAvailable: function (username) {
+        return User
+                .findOne({ 'username': username })
+                .then(function (user) {
+                  if (user) { 
+                    throw new Error('User already exist')
+                  }
+                })
+      }
+    }
+  }))
 
   let sessionOptions = {
     secret: config.sessionSecret,
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false
   }
 
   if (app.get('env' !== 'development')) {

@@ -22,7 +22,12 @@ html
               a(href="/users/register") Register
             li
               a(href="/users/login") Log In
-          if (globalError)
-            // TODO: Change h3 to div with class and appears under the menu 
-            h3= globalError
+      if (globalError)
+        // TODO: Change h3 to div with class and appears under the menu 
+        h3= globalError
+      if (errors)
+        section.errors
+          ul
+            each error in errors
+              li= error.msg
       block main-content

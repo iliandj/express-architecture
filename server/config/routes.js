@@ -11,7 +11,7 @@ module.exports = (app) => {
   app.post('/users/authenticate', controllers.users.authenticate)
   app.post('/users/logout', controllers.users.logout)
 
-// TODO: attach /users//login?returnUrl=..... to return after login  
+// TODO: attach /users//login?returnUrl=..... to return after login
 
 // TODO: To catch all routes with this logic
 //   app.all('/:controller/:method/:id', (req, res) => {

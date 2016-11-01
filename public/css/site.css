@@ -4,6 +4,10 @@ h1 {
 .container {
   padding-left: 25%
 }
+ul
+{
+  list-style-type: none;
+}
 .menu {
   list-style-type: none;
   padding-left: 0;

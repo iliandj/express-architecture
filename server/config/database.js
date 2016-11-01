@@ -1,4 +1,5 @@
 let mongoose = require('mongoose')
+require('../data/Movie')
 
 mongoose.Promise = global.Promise
 

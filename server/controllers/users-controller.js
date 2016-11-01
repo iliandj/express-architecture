@@ -8,28 +8,50 @@ module.exports = {
   create: (req, res) => {
     let user = req.body
 
-    // TODO: User must not already exist
-    // TODO: Password must be more than 6 characters long
-    if (user.password !== user.confirmPassword) {
-      user.globalError = 'Passwords do not match!'
-      res.render('users/register', user)
-    } else {
-      user.salt = encryption.generateSalt()
-      user.hashedPass = encryption.generateHashedPassword(user.salt, user.password)
+    req.check('username', 'Username must be more that 3 characters long').isLength({ min: 4 })
+    req.check('username', 'This username is already taken').isUsernameAvailable()
+    req.check('password', 'Password must be more than 6 characters long').isLength({ min: 6 })
+    req.check('password', 'Passwords do not match').notEmpty().equals(user.confirmPassword)
+    req.check('firstName', 'First Name is required').notEmpty()
+    req.check('lastName', 'Last Name is required').notEmpty()
 
-      User
-        .create(user)
-        .then(user => {
-          req.logIn(user, (err, user) => {
-            if (err) {
-              res.render('users/register', { globalError: 'Ooops 500' })
-              return
-            }
+    req.asyncValidationErrors()
+      .then(() => {
+        user.success = true
+        user.errors = null
+        user.salt = encryption.generateSalt()
+        user.hashedPass = encryption.generateHashedPassword(user.salt, user.password)
 
-            res.redirect('/')
+        User
+          .create(user)
+          .then(user => {
+            req.logIn(user, (err, user) => {
+              if (err) {
+                res.render('users/register', { globalError: 'Ooops 500' })
+                return
+              }
+
+              res.redirect('/')
+            })
           })
-        })
-    }
+      })
+      .catch((errors) => {
+        if (errors) {
+          user.errors = errors
+          user.success = false
+          res.render('users/register', user)
+          user.errors = null
+        }
+      })
+    // TODO: Password must be more than 6 characters long
+    //     if (user.password !== user.confirmPassword) {
+    //       user.globalError = 'Passwords do not match!'
+    //       res.render('users/register', user)
+    //     } else if (!user) {
+    //       // TODO: To Fix
+    //       user.globalError = `User "${user.username}" already exist!`
+    //       res.render('users/register', user)
+    //     } else {
   },
   login: (req, res) => {
     res.render('users/login')
