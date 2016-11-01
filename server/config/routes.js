@@ -15,7 +15,8 @@ module.exports = (app) => {
   app.get('/movies/manage', auth.isAuthenticated, controllers.movies.manage)
   app.get('/movies/add', auth.isAuthenticated, controllers.movies.add)
   app.post('/movies/insert', auth.isAuthenticated, controllers.movies.insert)
-  // app.get('/categories/manage', auth.isAuthenticated, controllers.categories.manage)
+  app.get('/categories/manage', auth.isAuthenticated, controllers.categories.manage)
+  app.post('/categories/add', auth.isAuthenticated, controllers.categories.add)
 
 // TODO: attach /users/login?returnUrl=..... to return after login
 

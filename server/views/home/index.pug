@@ -1,16 +1,15 @@
 extends ../shared/layout
 block main-content
   h1 Hello from Express!
-  div.movie-container
-    if (movieList)
-      each movie in movieList
-        article
+  div.movie-container.row
+    if (movies)
+      each movie in movies
+        article.col-xs-6.col-md-3
           header
             let movieDetailsLink = '/movie/details?id=' + movie._id
-            a(href= movieDetailsLink)
+            a.thumbnail(href= movieDetailsLink)
               img(src= movie.image.path, alt= movie.image.alt title= movie.image.title)
-            h6
+            div.caption
               a(href= movieDetailsLink) #{movie.name}
           div
             p= movie.year
-            div

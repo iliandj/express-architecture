@@ -15,7 +15,8 @@ module.exports = {
     req.check('firstName', 'First Name is required').notEmpty()
     req.check('lastName', 'Last Name is required').notEmpty()
 
-    req.asyncValidationErrors()
+    req
+      .asyncValidationErrors()
       .then(() => {
         user.success = true
         user.errors = null
