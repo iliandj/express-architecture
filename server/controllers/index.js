@@ -1,7 +1,7 @@
-let homeController = require('./home-controller')
-let usersController = require('./users-controller')
-let moviesController = require('./movie-controller')
-let categoriesController = require('./categories-controllers')
+let homeController = require('./home')
+let usersController = require('./users')
+let moviesController = require('./movie')
+let categoriesController = require('./categories')
 
 module.exports = {
   home: homeController,

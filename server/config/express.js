@@ -16,13 +16,29 @@ module.exports = (config, app) => {
   app.use(expressValidator({
     customValidators: {
       isUsernameAvailable: function (username) {
-        return User
-                .findOne({ 'username': username })
-                .then(function (user) {
-                  if (user) {
-                    throw new Error('User already exist')
-                  }
-                })
+//         return User
+//                 .findOne({ 'username': username })
+//                 .then(function (user) {
+//                   if (user) {
+//                     throw new Error('User already exist')
+//                   }
+//                 })
+        return new Promise((resolve, reject) => {
+          User
+            .findOne({ username: username })
+            .then((user) => {
+              if (!user) {
+                resolve()
+              } else {
+                reject(user)
+              }
+            })
+            .catch((error) => {
+              if (error) {
+                reject(error)
+              }
+            })
+        })
       }
     }
   }))

@@ -21,10 +21,18 @@ html
             ul.nav.navbar-nav
               li
                 a(href="/") Home
+              li.dropdown
+                if (genres)
+                  a(href="/categories" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Genres
+                    span.caret
+                  ul.dropdown-menu
+                    each genre in genres
+                      li
+                        a(href='/categories/'+genre.name) #{genre.name}
+                else
+                  a(href="/categories") Genres
               li
-                a(href="/movies/genres") Genres
-              li
-                a(href="/movies/a-z-list") A-Z List
+                a(href="/movies/a-z-list" role="button") A-Z List
               li
                 a(href="/about") About
             ul.nav.navbar-nav.navbar-right
@@ -38,9 +46,9 @@ html
                     span.caret
                   ul.dropdown-menu
                     li
-                      a(href="/categories/manage") Categories
+                      a(href="/categories/index") Categories
                     li
-                      a(href="/movies/manage") Movies
+                      a(href="/movies/index") Movies
                 li
                   a(class="navbar-link" href="javascript:document.getElementById('logout-form').submit()") Logout
                   form#logout-form(method="post" action="/users/logout")

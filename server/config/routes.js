@@ -12,11 +12,14 @@ module.exports = (app) => {
   app.post('/users/logout', auth.isAuthenticated, controllers.users.logout)
   app.get('/users/profile', auth.isAuthenticated, controllers.users.profile)
   app.post('/users/update', auth.isAuthenticated, controllers.users.update)
-  app.get('/movies/manage', auth.isAuthenticated, controllers.movies.manage)
+  app.get('/movies/index', auth.isAuthenticated, controllers.movies.index)
   app.get('/movies/add', auth.isAuthenticated, controllers.movies.add)
   app.post('/movies/insert', auth.isAuthenticated, controllers.movies.insert)
-  app.get('/categories/manage', auth.isAuthenticated, controllers.categories.manage)
+  app.get('/categories/index', auth.isAuthenticated, controllers.categories.index)
   app.post('/categories/add', auth.isAuthenticated, controllers.categories.add)
+  app.get('/categories/:name', (req, res) => {
+    controllers.categories.genre(req.params.name)
+  })
 
 // TODO: attach /users/login?returnUrl=..... to return after login
 

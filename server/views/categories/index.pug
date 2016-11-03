@@ -1,6 +1,6 @@
 extends ../shared/layout
 block main-content
-  h1 Manage gategories
+  h1 Manage categories
   div.col-md-7
     div.panel.panel-default
       div.panel-heading
@@ -9,7 +9,7 @@ block main-content
         form.form-inline(method="post" action="/categories/add" role="form")
           div.form-group
             label.control-label(for="name") Category name
-            input.form-control(type="text" name="name" id="name")
+            input.form-control(type="text" name="name" id="name" required)
           if (categories)
             div.list-group
               each category in categories
