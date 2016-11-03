@@ -4,7 +4,7 @@ block main-content
   form.col-xs-3(method="post" action="/users/update")
     div.form-group
       label(for="username") Username
-      input.form-control(type="text" name="username" id="username" value=username)
+      input.form-control(type="text" name="username" id="username" value=body ? body.username : '')
     div.form-group
       label(for="password") Password
       input.form-control(type="password" name="password" id="password")
@@ -13,8 +13,8 @@ block main-content
       input.form-control(type="password" name="confirmPassword" id="confirm-password")
     div.form-group
       label(for="first-name") First Name
-      input.form-control(type="text" name="firstName" id="first-name" value=firstName)
+      input.form-control(type="text" name="firstName" id="first-name" value=body ? body.firstName : '')
     div.form-group
       label(for="last-name") Last Name
-      input.form-control(type="text" name="lastName" id="last-name" value=lastName)
+      input.form-control(type="text" name="lastName" id="last-name" value=body ? body.lastName : '')
     button.btn.btn-default(type="submit") Update

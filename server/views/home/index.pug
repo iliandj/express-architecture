@@ -1,15 +1,18 @@
 extends ../shared/layout
 block main-content
-  h1 Hello from Express!
+  h1 Most Popular Movies
   div.movie-container.row
     if (movies)
       each movie in movies
-        article.col-xs-6.col-md-3
-          header
-            let movieDetailsLink = '/movie/details?id=' + movie._id
-            a.thumbnail(href= movieDetailsLink)
-              img(src= movie.image.path, alt= movie.image.alt title= movie.image.title)
-            div.caption
-              a(href= movieDetailsLink) #{movie.name}
-          div
-            p= movie.year
+        div.col-xs-6.col-md-3
+          article.thumbnail
+            header.caption
+              a.thumbnail(href= '/movie/details?id='+movie.name)
+                img(src= movie.image[0].path, alt= movie.image[0].alt title= movie.image[0].title)
+              p
+                a(href= '/movie/details?id='+movie.name) #{movie.name}
+              p= movie.year
+              p
+                a(role="button")
+                  span.glyphicon.glyphicon-star(aria-hidden="true")
+                  | #{" "+movie.rating}

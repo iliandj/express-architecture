@@ -4,8 +4,8 @@ block main-content
   form.col-xs-3(method="post" action="/users/authenticate")
     div.form-group
       label(for="username") Username
-      input.form-control(type="text" name="username" id="username")
+      input.form-control(type="text" name="username" id="username" required)
     div.form-group
       label(for="password") Password
-      input.form-control(type="password" name="password" id="password")
+      input.form-control(type="password" name="password" id="password" required)
     button.btn.btn-default(type="submit") Log In
