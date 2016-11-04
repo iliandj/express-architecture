@@ -1,0 +1,14 @@
+extends ../shared/layout
+block main-content
+  .container
+    .row
+      h1 Add new movie
+      form.col-md-3(method="post" action="/movies/create" role="form")
+        div.form-group
+          label.control-label(for="title") Title
+          input.form-control(type="text" name="title" id="title" placeholder="Enter title" required)
+        button.btn.btn-default(type="submit") Add
+      if (movies)
+        div.list-group
+          each movie in movies
+            a.list-group-item(href='/movies/update?id='+movie.title) movie.title

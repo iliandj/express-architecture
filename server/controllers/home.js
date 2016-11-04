@@ -5,6 +5,7 @@ module.exports = {
   index: (req, res) => {
     Genre
       .find()
+      .sort({ name: 1 })
       .then(genres => {
         Movie
           .find()

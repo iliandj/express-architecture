@@ -2,33 +2,44 @@ const Category = require('mongoose').model('Category')
 
 module.exports = {
   index: (req, res) => {
-    if (req.session.body === undefined || (req.headers.referer && req.headers.referer.indexOf('/users/register') < 0)) {
-      req.session.body = null
+    if (req.session.body === undefined || (req.headers.referer && req.headers.referer.indexOf('categories/index') < 0)) {
+      // req.session.body = null
       req.session.errors = null
       req.session.success = false
+      req.session.selected = null
     }
 
-    res.render('categories/index', { body: req.session.body, errors: req.session.errors, success: req.session.success })
+    Category
+      .find()
+      .sort({ name: 1 })
+      .then(categories => {
+        req.session.body = categories
+        req.session.errors = null
+        req.session.success = false
+
+        res.render('categories/index', { body: req.session.body, selected: req.session.selected, errors: req.session.errors, success: req.session.success })
+      })
   },
-  add: (req, res) => {
+  store: (req, res) => {
     req.check('name', 'Category must be more that 3 characters long').isLength({ min: 4 })
 
     let category = req.body
+    let selectedCategory = req.session.selected
 
     req
       .asyncValidationErrors()
       .then(() => {
-        category.success = true
         Category
-          .create(category)
-          .then(() => {
+          .update({ name: selectedCategory }, { $set: { name: category.name } }, { upsert: true }, () => {
             Category
-              .find({})
-              .then((categories) => {
+              .find()
+              .sort({ name: 1 })
+              .then(categories => {
                 req.session.body = categories
                 req.session.errors = null
                 req.session.success = true
-                res.render('categories/index', {errors: req.session.errors, success: req.session.success})
+                req.session.selected = null
+                res.redirect(req.headers.referer)
               })
           })
       })
@@ -39,6 +50,16 @@ module.exports = {
           res.redirect(req.headers.referer)
         }
       })
+  },
+  update: (req, res) => {
+    console.log(req.query.id)
+    req.session.selected = req.query.id
+    req.session.errors = null
+    console.log(req.headers.referer)
+    res.redirect('index')
+  },
+  delete: (id) => {
+
   },
   genre: (name) => {
     console.log(name)

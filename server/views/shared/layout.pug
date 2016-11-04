@@ -6,57 +6,55 @@ html
     meta(name="viewport" content="width=device-width, initial-scale=1")
  
     title Hello!
-    // link(rel="stylesheet", href="/css/site.css")
-    
     // Latest compiled and minified CSS
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
 
     // Optional theme
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous")
+    link(rel="stylesheet", href="/css/site.css")
   body
     .container
       nav.navbar.navbar-default
-        div.container-fluid
-          #navbar.navbar-collapse.collapse
-            ul.nav.navbar-nav
-              li
-                a(href="/") Home
-              li.dropdown
-                if (genres)
-                  a(href="/categories" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Genres
-                    span.caret
-                  ul.dropdown-menu
-                    each genre in genres
-                      li
-                        a(href='/categories/'+genre.name) #{genre.name}
-                else
-                  a(href="/categories") Genres
-              li
-                a(href="/movies/a-z-list" role="button") A-Z List
-              li
-                a(href="/about") About
-            ul.nav.navbar-nav.navbar-right
-              if (currentUser)
-                li
-                  p.navbar-text Signed in as 
-                    a.navbar-link(href="/users/profile")
-                      strong #{currentUser.username}
-                li.dropdown
-                  a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Administration 
-                    span.caret
-                  ul.dropdown-menu
+        #navbar.navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li
+              a(href="/") Home
+            li.dropdown
+              if (genres)
+                a(href="/categories" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Genres
+                  span.caret
+                ul.dropdown-menu
+                  each genre in genres
                     li
-                      a(href="/categories/index") Categories
-                    li
-                      a(href="/movies/index") Movies
-                li
-                  a(class="navbar-link" href="javascript:document.getElementById('logout-form').submit()") Logout
-                  form#logout-form(method="post" action="/users/logout")
+                      a(href='/categories/'+genre.name) #{genre.name}
               else
-                li
-                  a(href="/users/register") Register
-                li
-                  a(href="/users/login") Log In
+                a(href="/categories") Genres
+            li
+              a(href="/movies/a-z-list" role="button") A-Z List
+            li
+              a(href="/about") About
+          ul.nav.navbar-nav.navbar-right
+            if (currentUser)
+              li
+                p.navbar-text Signed in as 
+                  a.navbar-link(href="/users/profile")
+                    strong #{currentUser.username}
+              li.dropdown
+                a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Administration 
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    a(href="/categories/index") Categories
+                  li
+                    a(href="/movies/index") Movies
+              li
+                a(class="navbar-link" href="javascript:document.getElementById('logout-form').submit()") Logout
+                form#logout-form(method="post" action="/users/logout")
+            else
+              li
+                a(href="/users/register") Register
+              li
+                a(href="/users/login") Log In
       if (globalError)
         // TODO: Remove globalError and migrate to express-validator
         h3= globalError

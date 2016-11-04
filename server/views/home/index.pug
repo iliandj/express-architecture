@@ -7,10 +7,10 @@ block main-content
         div.col-xs-6.col-md-3
           article.thumbnail
             header.caption
-              a.thumbnail(href= '/movie/details?id='+movie.name)
+              a.thumbnail(href= '/movie/details?id='+movie.title)
                 img(src= movie.image[0].path, alt= movie.image[0].alt title= movie.image[0].title)
               p
-                a(href= '/movie/details?id='+movie.name) #{movie.name}
+                a(href= '/movie/details?id='+movie.title) #{movie.title}
               p= movie.year
               p
                 a(role="button")

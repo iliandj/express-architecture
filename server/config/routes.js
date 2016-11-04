@@ -13,13 +13,18 @@ module.exports = (app) => {
   app.get('/users/profile', auth.isAuthenticated, controllers.users.profile)
   app.post('/users/update', auth.isAuthenticated, controllers.users.update)
   app.get('/movies/index', auth.isAuthenticated, controllers.movies.index)
-  app.get('/movies/add', auth.isAuthenticated, controllers.movies.add)
-  app.post('/movies/insert', auth.isAuthenticated, controllers.movies.insert)
+  app.get('/movies/create', auth.isAuthenticated, controllers.movies.create)
+  app.post('/movies/store', auth.isAuthenticated, controllers.movies.store)
   app.get('/categories/index', auth.isAuthenticated, controllers.categories.index)
-  app.post('/categories/add', auth.isAuthenticated, controllers.categories.add)
-  app.get('/categories/:name', (req, res) => {
-    controllers.categories.genre(req.params.name)
+  app.post('/categories/store', auth.isAuthenticated, controllers.categories.store)
+  app.get('/categories/:method/:id?', (req, res) => {
+    console.log(req.params.method)
+    controllers.categories[req.params.method](req, res)
+    // controllers.categories.req.params.method(req.query.id)
   })
+//   app.get('/categories/:name', (req, res) => {
+//     controllers.categories.genre(req.params.name)
+//   })
 
 // TODO: attach /users/login?returnUrl=..... to return after login
 

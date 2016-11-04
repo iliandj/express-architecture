@@ -4,7 +4,7 @@ const paginate = require('mongoose-paginate')
 const requiredValidationMessage = '{PATH} is required'
 
 let movieSchema = mongoose.Schema({
-  name: { type: String, required: requiredValidationMessage, trim: true },
+  title: { type: String, required: requiredValidationMessage, trim: true },
   image: [{ path: String, alt: String, title: String }],
   year: { type: String },
   rating: { type: Number, default: 0 },
@@ -16,7 +16,7 @@ let movieSchema = mongoose.Schema({
   timestamps: true
 })
 
-movieSchema.index({ name: 1, year: 1 })
+movieSchema.index({ title: 1, year: 1 })
 movieSchema.plugin(uniqueValidator)
 movieSchema.plugin(paginate)
 

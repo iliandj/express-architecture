@@ -1,17 +1,20 @@
 extends ../shared/layout
 block main-content
-  h1 Manage categories
-  div.col-md-7
-    div.panel.panel-default
-      div.panel-heading
-        h3.panel-title Add category
-      div.pabel-body
-        form.form-inline(method="post" action="/categories/add" role="form")
-          div.form-group
+  .container
+    .row
+      h1 Categories
+      .row
+        form.col-md-3(method="post" action="/categories/store" role="form")
+          .form-group
             label.control-label(for="name") Category name
-            input.form-control(type="text" name="name" id="name" required)
-          if (categories)
-            div.list-group
-              each category in categories
-                a.list-group-item(href='/categories/update?id='+category.name)
-          button.btn.btn-default(type="submit") Add
+            input.form-control(type="text" name="name" id="name" value=selected ? selected : '' required)
+          if (!selected)
+            button.btn.btn-default(type="submit") Add
+          else
+            button.btn.btn-default(type="submit") Update
+      if (body)
+        .row.col-md-3
+          .list-group
+          h2.list-group-heading
+            each category in body
+              a.list-group-item(href='/categories/update?id='+category.name) #{category.name}
