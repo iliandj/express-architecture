@@ -12,9 +12,16 @@ block main-content
             button.btn.btn-default(type="submit") Add
           else
             button.btn.btn-default(type="submit") Update
+      br
       if (body)
-        .row.col-md-3
-          .list-group
-          h2.list-group-heading
+        .row.col-md-4.panel-body
+          ul.list-group
             each category in body
-              a.list-group-item(href='/categories/update?id='+category.name) #{category.name}
+              li.list-group-item
+                div
+                  label #{category.name}
+                .pull-right.action-buttons
+                  a(href='/categories/update?id='+category.name)
+                    span.glyphicon.glyphicon-pencil
+                  a.trash(href='/categories/delete?id='+category.name)
+                    span.glyphicon.glyphicon-trash

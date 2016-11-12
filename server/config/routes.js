@@ -12,9 +12,11 @@ module.exports = (app) => {
   app.post('/users/logout', auth.isAuthenticated, controllers.users.logout)
   app.get('/users/profile', auth.isAuthenticated, controllers.users.profile)
   app.post('/users/update', auth.isAuthenticated, controllers.users.update)
+
   app.get('/movies/index', auth.isAuthenticated, controllers.movies.index)
   app.get('/movies/create', auth.isAuthenticated, controllers.movies.create)
   app.post('/movies/store', auth.isAuthenticated, controllers.movies.store)
+
   app.get('/categories/index', auth.isAuthenticated, controllers.categories.index)
   app.post('/categories/store', auth.isAuthenticated, controllers.categories.store)
   app.get('/categories/:method/:id?', (req, res) => {

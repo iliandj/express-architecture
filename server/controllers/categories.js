@@ -58,8 +58,16 @@ module.exports = {
     console.log(req.headers.referer)
     res.redirect('index')
   },
-  delete: (id) => {
-
+  delete: (req, res) => {
+    console.log(req.query.id)
+    Category
+      .findOneAndRemove({ name: req.query.id })
+      .then(() => {
+        console.log(req.query.id + ' is deleted')
+        req.session.selected = null
+        req.session.errors = null
+        res.redirect('index')
+      })
   },
   genre: (name) => {
     console.log(name)
