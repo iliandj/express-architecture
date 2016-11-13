@@ -6,15 +6,22 @@ const requiredValidationMessage = '{PATH} is required'
 let movieSchema = mongoose.Schema({
   title: { type: String, required: requiredValidationMessage, trim: true },
   image: [{ path: String, alt: String, title: String }],
-  year: { type: String },
   rating: { type: Number, default: 0 },
   description: { type: String, default: '' },
   cast: [{ type: String, default: [] }],
   categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: requiredValidationMessage }],
   releaseDate: { type: Date, default: Date.now }
 }, {
-  timestamps: true
+  timestamps: true,
+  toObject: { virtuals: true },
+  toJSON: { virtuals: true }
 })
+
+movieSchema
+  .virtual('year')
+  .get(function () {
+    return this.releaseDate.getFullYear()
+  })
 
 movieSchema.index({ title: 1, year: 1 })
 movieSchema.plugin(uniqueValidator)
