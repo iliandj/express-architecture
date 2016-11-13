@@ -18,8 +18,7 @@ block main-content
           ul.list-group
             each category in body
               li.list-group-item
-                div
-                  label #{category.name}
+                span #{category.name}
                 .pull-right.action-buttons
                   a(href='/categories/update?id='+category.name)
                     span.glyphicon.glyphicon-pencil

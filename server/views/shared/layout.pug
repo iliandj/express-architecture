@@ -55,9 +55,6 @@ html
                 a(href="/users/register") Register
               li
                 a(href="/users/login") Log In
-      if (globalError)
-        // TODO: Remove globalError and migrate to express-validator
-        h3= globalError
       if (success)
         div.alert.alert-success(role="alert")
           <strong>Well done!</strong> Operation successfull. 
