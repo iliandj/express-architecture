@@ -14,8 +14,6 @@ module.exports = {
       .sort({ name: 1 })
       .then(categories => {
         req.session.body = categories
-        req.session.errors = null
-        req.session.success = false
 
         res.render('categories/index', { body: req.session.body, selected: req.session.selected, errors: req.session.errors, success: req.session.success })
       })
